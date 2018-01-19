@@ -1,5 +1,6 @@
 ## Core latex/pdflatex auxiliary files:
 *temp/
+
 *.aux
 *.lof
 *.log
