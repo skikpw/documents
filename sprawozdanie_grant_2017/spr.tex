@@ -42,7 +42,7 @@
  left=20mm,
  right=20mm,
  top=20mm,
- bottom=25mm,
+ bottom=30mm,
  }   
    
 
@@ -95,13 +95,13 @@
 
 \usepackage[section]{placeins} %\FloatBarrier
 % \usepackage{hyperref}
-   
+\usepackage{lastpage}
 \usepackage{fancyhdr}
 \setlength{\headheight}{38pt}
 \pagestyle{fancy}
 
 \lhead{Sprawozdanie z grantu rektorskiego koła SKIK 2017}     \rhead{\today\quad\includegraphics[width=1.5cm]{logo_skik}}
-\lfoot{}            \cfoot{}        \rfoot{strona \thepage/7}
+\lfoot{}            \cfoot{}        \rfoot{strona \thepage/\pageref{LastPage}}
 
 \title{Projekt przedmiotu Sieci Neuronowe i Neurokomputery wydziału EiTI Politechniki Warszawskiej}
 \author{Artur Dobrogowski}
