@@ -2,7 +2,9 @@
 
 Konstrukcja rotora składa się z dwóch stalowych skrzynek osłaniających silniki. W skrzynkach zostały wykonane otwory na poprowadzenie przewodów do zasilania i sterowania.
 
-Aby uzyskać dużą precyzję i wytrzymały na warunki zewnętrzne system pomimo małych gabarytów, potrzebne było duże przełożenie dla silników. Po doborze przekładni pełen obrót w płaszczyźnie azymutu zajmuje 124 sekundy, a w płaszczyźnie elewacji 64 sekundy. Wolny czas obrotu zwykle w rotorach antenowych nie przeszkadza, ponieważ zwykle nie namierza się szybko poruszających się źródeł sygnału. Podane prędkości są dla zasilania napięciem 12 V. Jest możliwe uzyskanie proporcjonalnie szybszych obrotów dostarczając większe napięcie zasilania (np. łącząc dwa akumulatory równolegle). Użyte silniki tolerują napięcie do 30V.
+Aby uzyskać system z dużą precyzją i wytrzymały na warunki zewnętrzne pomimo małych gabarytów, potrzebne było duże przełożenie dla silników. Po doborze przekładni pełen obrót w płaszczyźnie azymutu zajmuje 124 sekundy, a w płaszczyźnie elewacji 64 sekundy. Wolny czas obrotu zwykle w rotorach antenowych nie przeszkadza, ponieważ zwykle nie namierza się szybko poruszających się źródeł sygnału. Podane prędkości są dla zasilania napięciem 12 V. Jest możliwe uzyskanie proporcjonalnie szybszych obrotów dostarczając większe napięcie zasilania (np. łącząc dwa akumulatory równolegle). Użyte silniki tolerują napięcie do 30V.
+
+Zastosowane przekładnie wprost za silnikami mają mechanizm samoblokujący - ślimakowy, co uniemożliwia ich obrotu bez pracy silników.
 
 Śledzenie pozycji rotora odbywa się przy pomocy zestawu czujników: 
 \begin{itemize}
@@ -30,16 +32,25 @@ Górna część rotora znajdująca się na rysunku \ref{rotgora} zawiera silnik 
 
 W przenośnym rozwiązaniu układ SDR znajduje się w dodatkowym pokrowcu (walizce) umieszczonym pod rotorem, gdzie dochodzi do niego przewód radiowy wprost z anteny.
 
+W rozwiązaniu zrezygnowano z użycia silników krokowych w zamian za proste silniki szczotkowe DC wraz z dodaniem enkoderów, ze względu na łatwość uzyskania dobrej precyzji tanim kosztem. W ramach projektu opracowano też sterowniki do silników w postaci mostków H. Schemat układu przedstawiono na rysunku \ref{mostekh}.
+
 \begin{figure}[!htbp]
- \includegraphics[width=0.7\textwidth]{rotor_dol}
+ \includegraphics[width=\textwidth]{rotor_dol}
  \centering
  \caption{Wnętrze dolnej części rotora}
  \label{rotdol}
 \end{figure}
 
 \begin{figure}[!htbp]
- \includegraphics[width=0.7\textwidth]{rotor_gora}
+ \includegraphics[width=\textwidth]{rotor_gora}
  \centering
  \caption{Wnętrze górnej części rotora}
  \label{rotgora}
+\end{figure}
+
+\begin{figure}[!htbp]
+ \includegraphics[width=\textwidth]{mostekh}
+ \centering
+ \caption{Mostek H - układ do sterowania silnikiem DC}
+ \label{mostekh}
 \end{figure}

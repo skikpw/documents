@@ -50,9 +50,39 @@ Do odbioru sygnału APRS zostanie wykorzystany odbiornik bazujący na Realtek RT
  \caption{Widok programu Xastir.}
 \end{figure}
 
+\subsubsection{Demodulator BFSK}
 
-Dodatkowo jeden z członków podjął się wykonania części odbiornika na układzie FPGA z przetwornikiem analogowo-cyfrowym. Jest to tylko rozwiązanie cyfrowej demodulacji sygnału, które trzeba uzupełnić o część analogową - filtry i mieszacz. Rozważamy w przyszłości dokończenie tego układu w celu uzyskania bardziej przenośnego rozwiązania i przeniesienia obliczeń na układ FPGA. Na obrazku \ref{fpga} przedstawiono wyniki symulacji demodulatora.
+Dodatkowo w ramach grantu napisano demodulator sygnału BFSK (np. APRS) w języku VHDL do zreazlizowania układzie FPGA z przetwornikiem analogowo-cyfrowym. Dzięki temu możliwe będzie przeniesienie oprogramowania realizującego odbiór sygnału z komputera PC do układu FPGA wewnątrz modułu SDR. 
 
+BFSK \emph{(binary frequency shift keying)} to cyfrowa modulacja wykorzystywana  między innymi w komunikacji APRS (służących do podawania pozycji przez radio). Polega na nadawaniu stałego sygnału sinusuidalnego o częstotliwości F0 dla bitu 0 lub częstotliwości F1 dla bitu 1. Przykładowy przebieg pokazano na rysunku \ref{bfsk}
+
+Na obrazku \ref{fpga} przedstawiono wyniki symulacji demodulatora, a na schemacie \ref{bfsk_demodulator} widać schemat blokowy symulowanego demodulatora.
+
+
+\begin{figure}[!htbp]
+ \includegraphics[width=\textwidth]{bfsk}
+ \centering
+ \caption{Przebieg sygnału o modulacji BFSK}
+ \label{bfsk}
+\end{figure}
+
+
+\begin{figure}[!htbp]
+ \includegraphics[width=0.35\textwidth]{bfsk_demodulator}
+ \centering
+ \caption{Schemat blokowy demodulatora BFSK}
+ \label{bfsk_demodulator}
+\end{figure}
+
+
+W symulacji sygnał FSK dostarczany do ADC miał odpowiednio częstotliwości 1200Hz i 2200Hz dla F0 i F1.  Sygnał był spróbkowany z Fs = 48kHz., użyty ADC to MCP3208. FPGA komunikuje się z ADC po szynie SPI. Następnie sygnał FSK trafia do demodulatora zaimplementowanego w FPGA \ref{bfsk_demodulator}.  W demodulatorze ten sygnał jest opóźniony o k próbek, a następnie pomnożony z aktualną próbką. Potem znajduje się filtr dolno przepustowy o częstotliwości granicznej równej połowie bitów na sekundę. Otrzymany sygnał jest zdemodulowany.
+
+Opóźnienie k jest policzone na bazie znalezienia minima poniższego równania.
+
+\begin{equation}
+d(k) = |\cos(2\pi F_0 k T_e) - \cos(2\pi F_1 k T_e) |
+\end{equation}
+Gdzie {$T_e$ - okres próbkowania, $k$ - opóźnienie sygnału}.
 
 \begin{figure}[!htbp]
  \includegraphics[width=\textwidth]{symulacja}
@@ -60,4 +90,5 @@ Dodatkowo jeden z członków podjął się wykonania części odbiornika na ukł
  \caption{Wynik symulacji demodulacji APRS na FPGA}
  \label{fpga}
 \end{figure}
+
 % Okazało się, że gotowe projekty oprogramowania demodulatora zarówno APRS jak i LoRa są dostępne w internecie z otwartym oprogramowaniem w GNU radio, więc wystarczyło je przetestować w naszych układach.
